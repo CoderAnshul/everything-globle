@@ -1,0 +1,1 @@
+export const BASE_URL = "https://devvrat-new-backend.onrender.com/api/user"
