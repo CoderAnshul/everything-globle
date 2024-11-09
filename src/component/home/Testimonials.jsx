@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { MdFormatQuote } from 'react-icons/md';
+import { BASE_URL } from '../../utils/config';
+import axios from 'axios';
+import Loader from '../layout/Loader';
 
 export const Testimonials = () => {
+
+    const [testimonialData, setTestimonialData] = useState([])
+    const [loading, setLoading] = useState(true)
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const resp = await axios.get(`${BASE_URL}/all-testimonial-text?organizationId=everything_globel`)
+
+            if (resp?.data?.http_status_code === 200) {
+                setTestimonialData(resp?.data?.data || [])
+                setLoading(false)
+            }
+        }
+        fetchData()
+    }, [])
+
+    if (loading) {
+        return <Loader />
+    }
+
+
+
     const settings = {
         dots: true,
         infinite: true,
@@ -41,36 +67,19 @@ export const Testimonials = () => {
     return (
         <div className='relative pb-20'>
             <Slider {...settings}>
-                <div className={`relative mb-[40px] `}>
-                    <img src={`/image/home/persion1.jpg`} className={`rounded-full overflow-hidden border border-black h-[200px] w-[200px]`} alt={`category-1`} />
-                    <div className={`border border-black w-[80%] ml-auto -mt-14 relative bg-white flex flex-col justify-start space-y-4 p-4 sm:p-8 rounded-2xl `}>
-                        <h3 className={`font-semibold text-xl`}>Maja Ho</h3>
-                        <div className={`text-black/90 text-sm sm:text-base`}><p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p></div>
+                {testimonialData ? testimonialData.map((item, index) => (
+                    <div className={`relative mb-[40px] `} key={index}>
+                        <img src={item?.image_url} className={`rounded-full overflow-hidden border border-black h-[200px] w-[200px]`} alt={`category-1`} />
+                        <div className={`border border-black w-[80%] ml-auto -mt-14 relative bg-white flex flex-col justify-start space-y-4 p-4 sm:p-8 rounded-2xl `}>
+                            <h3 className={`font-semibold text-xl`}>{item?.name}</h3>
+                            <div className={`text-black/90 text-sm sm:text-base`}><p>{item?.description}</p></div>
+                        </div>
+                        <div className="absolute -bottom-5 -right-0 border border-black bg-[#cbdec6] rounded-xl p-3">
+                            <MdFormatQuote className='text-3xl' />
+                        </div>
                     </div>
-                    <div className="absolute -bottom-5 -right-0 border border-black bg-[#cbdec6] rounded-xl p-3">
-                        <MdFormatQuote className='text-3xl' />
-                    </div>
-                </div>
-                <div className={`relative mb-[40px] pr-8 max-sm:right-6`}>
-                    <img src={`/image/home/persion2.jpg`} className={`rounded-full overflow-hidden border border-black h-[200px] w-[200px]`} alt={`category-1`} />
-                    <div className={`border border-black w-[80%] ml-auto -mt-14 relative bg-white flex flex-col justify-start space-y-4 p-4 sm:p-8 rounded-2xl `}>
-                        <h3 className={`font-semibold text-xl`}>Maja Ho</h3>
-                        <div className={`text-black/90 text-sm sm:text-base`}><p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p></div>
-                    </div>
-                    <div className="absolute -bottom-5 -right-0 border border-black bg-[#cbdec6] rounded-xl p-3">
-                        <MdFormatQuote className='text-3xl' />
-                    </div>
-                </div>
-                <div className={`relative mb-[40px] pr-8 max-sm:right-6`}>
-                    <img src={`/image/home/persion3.jpg`} className={`rounded-full overflow-hidden border border-black h-[200px] w-[200px]`} alt={`category-1`} />
-                    <div className={`border border-black w-[80%] ml-auto -mt-14 relative bg-white flex flex-col justify-start space-y-4 p-4 sm:p-8 rounded-2xl `}>
-                        <h3 className={`font-semibold text-xl`}>Maja Ho</h3>
-                        <div className={`text-black/90 text-sm sm:text-base`}><p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p></div>
-                    </div>
-                    <div className="absolute -bottom-5 -right-0 border border-black bg-[#cbdec6] rounded-xl p-3">
-                        <MdFormatQuote className='text-3xl' />
-                    </div>
-                </div>
+                )) : "No Testimonial Available"}
+
             </Slider>
             <div className="swiper-pagination-custom mt-4"></div>
         </div>

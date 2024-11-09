@@ -68,7 +68,7 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
         setSuccessMessage("");
         setErrorMessage("");
         try {
-            const response = await fetch(`${BASE_URL}/contact-us`, {
+            const response = await fetch(`${BASE_URL}/add-contact-us?organizationId=everything_globel`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

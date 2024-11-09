@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Modal from 'react-modal';
 import { MdPlayCircle } from 'react-icons/md';
+import axios from 'axios';
+import { BASE_URL } from '../../utils/config';
+import Loader from '../layout/Loader';
 
 // Ensure accessibility for the modal
 Modal.setAppElement('#root'); // Use '#root' if this is a standard React project
@@ -11,9 +14,43 @@ Modal.setAppElement('#root'); // Use '#root' if this is a standard React project
 const VideoTestimonial = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [selectedVideo, setSelectedVideo] = useState(null);
+    const [testimonialData, setTestimonialData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    // Fetch testimonial data from the API
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const resp = await axios.get(`${BASE_URL}/all-testimonial-video?organizationId=everything_globel`);
+                if (resp?.data?.http_status_code === 200) {
+                    // Map the response to extract video_id and title
+                    const formattedData = resp?.data?.data.map((video) => ({
+                        id: video.id,
+                        title: video.title,
+                        videoUrl: video.video_url,
+                    }));
+                    setTestimonialData(formattedData);
+                    setLoading(false);
+                } else {
+                    console.error('Failed to load testimonial data');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    if (loading) {
+        return <Loader />;
+    }
 
     // Open modal with the selected video
-    const openModal = (videoId) => {
+    const openModal = (videoUrl) => {
+        // Extract video ID from the YouTube URL
+        const videoId = new URL(videoUrl).searchParams.get('v');
         setSelectedVideo(videoId);
         setModalIsOpen(true);
     };
@@ -57,28 +94,21 @@ const VideoTestimonial = () => {
         ]
     };
 
-    // List of YouTube video IDs
-    const videos = [
-        { id: 'dQw4w9WgXcQ', title: 'Video 1' },
-        { id: '9bZkp7q19f0', title: 'Video 2' },
-        { id: '3JZ_D3ELwOQ', title: 'Video 3' },
-    ];
-
     return (
         <div className="relative custom_container">
             <Slider {...settings}>
-                {videos.map((video) => (
+                {testimonialData.map((video) => (
                     <div key={video.id} className="relative mb-10 sm:px-4">
                         <div className="relative">
-                            <img 
-                                src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`} 
-                                className="rounded-xl overflow-hidden w-full" 
-                                alt={`Video Thumbnail`} 
+                            <img
+                                src={`https://img.youtube.com/vi/${new URL(video.videoUrl).searchParams.get('v')}/hqdefault.jpg`}
+                                className="rounded-xl overflow-hidden w-full"
+                                alt={`Video Thumbnail`}
                             />
                             {/* Play button overlay */}
-                            <MdPlayCircle 
+                            <MdPlayCircle
                                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-6xl cursor-pointer"
-                                onClick={() => openModal(video.id)}
+                                onClick={() => openModal(video.videoUrl)}
                             />
                         </div>
                         <h3 className="font-semibold text-xl mt-4 text-center">{video.title}</h3>

@@ -17,7 +17,7 @@ export default function Blog() {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/get-blogs`);
+                const response = await axios.get(`${BASE_URL}/get-blog?organizationId=everything_globel`);
                 console.log("response", response);
 
                 setBlogData(response.data.data);

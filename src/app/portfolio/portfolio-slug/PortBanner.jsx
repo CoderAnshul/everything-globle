@@ -2,22 +2,26 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import 'swiper/css/navigation'; 
+import 'swiper/css/navigation';
 import { Pagination, EffectFade, Autoplay, Navigation } from 'swiper/modules';
 import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
 
-export default function PortBanner() {
-    const images = [
-        {
-            url: "/image/portfoilo/port-single-img3.jpg",
-        },
-        {
-            url: "/image/portfoilo/port-single-img4.jpg",
-        },
-        {
-            url: "/image/portfoilo/port-single-img5.jpg",
-        }
-    ];
+export default function PortBanner(image) {
+    const imageData = image?.image
+    // console.log("image", imageData?.image);
+
+
+    // const images = [
+    //     {
+    //         url: "/image/portfoilo/port-single-img3.jpg",
+    //     },
+    //     {
+    //         url: "/image/portfoilo/port-single-img4.jpg",
+    //     },
+    //     {
+    //         url: "/image/portfoilo/port-single-img5.jpg",
+    //     }
+    // ];
 
     return (
         <div className='custom_container relative custom_global_space'>
@@ -34,9 +38,9 @@ export default function PortBanner() {
                     pagination={{ clickable: true }}
                     className="mySwiper"
                 >
-                    {images.map((image, index) => (
+                    {imageData.map((image, index) => (
                         <SwiperSlide key={index}>
-                            <img src={image.url} alt={`Slide ${index + 1}`} />
+                            <img src={image} alt={`Slide ${index + 1}`} />
                         </SwiperSlide>
                     ))}
 

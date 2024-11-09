@@ -1,8 +1,33 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { BASE_URL } from '../../utils/config';
+import Loader from '../layout/Loader';
 
 export default function FiveColumns() {
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
     const [tooltipAlignment, setTooltipAlignment] = useState({ x: 'left', y: 'top' });
+
+
+    const [portfolioData, setPortfolioData] = useState([])
+    const [loading, setloading] = useState(true)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const resp = await axios.get(`${BASE_URL}/all-portfolio?organizationId=everything_globel`)
+
+            if (resp?.data?.http_status_code === 200) {
+                setloading(false)
+                setPortfolioData(resp.data.data)
+            }
+        }
+        fetchData()
+    }, [])
+
+
+    if (loading) {
+        return <Loader />
+    }
+
 
     const handleMouseMove = (e, container) => {
         const rect = container.getBoundingClientRect();
@@ -12,7 +37,6 @@ export default function FiveColumns() {
         let xPos = e.clientX - rect.left;
         let yPos = e.clientY - rect.top;
 
-        // Adjust the alignment when the tooltip is near the edges
         let xAlign = 'left';
         let yAlign = 'top';
 
@@ -30,20 +54,6 @@ export default function FiveColumns() {
         setTooltipAlignment({ x: xAlign, y: yAlign });
     };
 
-    const array = [
-        { image: 'img1.jpg', title: 'Art', description: 'Visual Concept' },
-        { image: 'img2.jpg', title: 'Design', description: 'Creative Space' },
-        { image: 'img3.jpg', title: 'Photography', description: 'Capture Moments' },
-        { image: 'img4.jpg', title: 'Graphics', description: 'Digital Art' },
-        { image: 'img5.jpg', title: 'Painting', description: 'Canvas Expression' },
-        { image: 'img6.jpg', title: 'Illustration', description: 'Sketching Life' },
-        { image: 'img7.jpg', title: 'Sculpture', description: '3D Creation' },
-        { image: 'img8.jpg', title: 'Architecture', description: 'Building Dreams' },
-        { image: 'img9.jpg', title: 'Fashion', description: 'Style & Trends' },
-        { image: 'img10.jpg', title: 'Film', description: 'Visual Storytelling' },
-        { image: 'img11.jpg', title: 'Music', description: 'Sound Waves' },
-        { image: 'img12.jpg', title: 'Literature', description: 'Words in Motion' },
-    ];
 
     return (
         <>
@@ -68,15 +78,15 @@ export default function FiveColumns() {
                     </div>
                 </div>
                 <div className="grid grid-cols-2 border-b border-l border-r border-black sm:grid-cols-3 md:grid-cols-4">
-                    {array.map((item, index) => (
+                    {portfolioData.map((item, index) => (
                         <div
                             key={index}
                             className="col-span-1 border-l border-t border-black p-2 sm:p-5 lg:p-10 img_box relative cursor-pointer group"
                             onMouseMove={(e) => handleMouseMove(e, e.currentTarget)}
                         >
                             <img
-                                src={`/image/home/img/img${index + 1}.jpg`}
-                                alt={`Error${index}`}
+                                src={item?.banner_image[0]}
+                                alt={item?.title}
                                 className="rounded-3xl"
                             />
                             <div
@@ -99,7 +109,7 @@ export default function FiveColumns() {
                                 }}
                                 className="absolute custom_tool_tip z-20 text-xl font-semibold border border-black hidden group-hover:block p-2 w-fit whitespace-nowrap bg-white rounded-lg shadow-lg"
                             >
-                                {item.description}
+                                {item.sub_title}
                             </div>
                         </div>
                     ))}
