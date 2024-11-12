@@ -80,7 +80,7 @@ const Clients2 = () => {
                         onMouseLeave={() => setHoveredIndex(null)}
                     >
                         <img
-                            src={hoveredIndex === i ? item.img1 : item.img2}
+                            src={item?.banner_image}
                             alt={`Client ${i}`}
                             className="h-full object-contain"
                         />

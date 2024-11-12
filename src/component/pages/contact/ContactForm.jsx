@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { GoogleMap, Marker, LoadScript, InfoWindow } from '@react-google-maps/api';
 import Loader from "../../layout/Loader";
 import { BASE_URL } from "../../../utils/config";
+import axios from "axios";
 
 const mapContainerStyle = {
     width: '100%',
@@ -19,14 +20,14 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
     const [infoWindowPosition, setInfoWindowPosition] = useState(mapCenter);
 
     // Services for dropdown
-    const services = [
-        { value: "seo", label: "SEO Services" },
-        { value: "socialMedia", label: "Social Media Marketing" },
-        { value: "contentMarketing", label: "Content Marketing" },
-        { value: "emailMarketing", label: "Email Marketing" },
-        { value: "ppc", label: "Pay-Per-Click Advertising" },
-        { value: "digitalMarketingStrategy", label: "Digital Marketing Strategy" }
-    ];
+    // const services = [
+    //     { value: "seo", label: "SEO Services" },
+    //     { value: "socialMedia", label: "Social Media Marketing" },
+    //     { value: "contentMarketing", label: "Content Marketing" },
+    //     { value: "emailMarketing", label: "Email Marketing" },
+    //     { value: "ppc", label: "Pay-Per-Click Advertising" },
+    //     { value: "digitalMarketingStrategy", label: "Digital Marketing Strategy" }
+    // ];
 
     const [formData, setFormData] = useState({
         name: "",
@@ -89,9 +90,35 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
         }
     };
 
-    if (loading) {
+    const [blogPosts, setBlogData] = useState([]);
+    const [loadingData, setLoadingData] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchBlogs = async () => {
+            try {
+                const response = await axios.get(`${BASE_URL}/all-services?organizationId=everything_globel`);
+
+                setBlogData(response.data.data);
+                setLoadingData(false);
+            } catch (err) {
+                setError("Failed to fetch blog data.");
+                setLoadingData(false);
+            }
+        };
+
+        fetchBlogs();
+    }, []);
+
+    // console.log("blogData",blogPosts);
+
+
+
+    if (loading || loadingData) {
         return <Loader />;
     }
+
+
 
     return (
         <div className="border border-black rounded-[50px] overflow-hidden justify-center">
@@ -166,13 +193,13 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
 
                             {dropdownOpen && (
                                 <ul className="absolute w-[95%] left-[2.5%] z-10 bg-white border border-black rounded-3xl overflow-hidden mt-2">
-                                    {services.map(service => (
+                                    {blogPosts.map(service => (
                                         <li
-                                            key={service.value}
+                                            key={service.service}
                                             className="py-2 px-5 hover:bg-gray-100 cursor-pointer"
                                             onClick={() => handleServiceSelect(service)}
                                         >
-                                            {service.label}
+                                            {service.service}
                                         </li>
                                     ))}
                                 </ul>
