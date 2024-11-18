@@ -266,7 +266,7 @@ export default function Post() {
                             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor dolore magna aliqua."
                             imageUrl="https://i.pravatar.cc/150?img=32"
                         />
-                        <CommentSection />
+                        <CommentSection blogPosts={blogPosts}  />
                         <CommentForm />
                     </div>
                     <div className='col-span-12 lg:col-span-1 hidden lg:block'></div>
