@@ -1,58 +1,45 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { Pagination, EffectFade, Autoplay, Navigation } from 'swiper/modules';
-import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Pagination, EffectFade, Autoplay, Navigation } from "swiper/modules";
+import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
+import { IMAGE_BASE_URL } from "../../../utils/config";
 
 export default function PortBanner(image) {
-    const imageData = image?.image
-    // console.log("image", imageData?.image);
+  const imageData = image?.image;
 
+  return (
+    <div className="custom_container relative custom_global_space">
+      <div className="port-banner-slider">
+        <Swiper
+          modules={[Pagination, EffectFade, Autoplay, Navigation]}
+          effect="fade"
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          loop={true}
+          navigation={{
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          }}
+          pagination={{ clickable: true }}
+          className="mySwiper"
+        >
+          {imageData.map((image, index) => (
+            <SwiperSlide key={index}>
+              <img src={`${IMAGE_BASE_URL}/${image}`} alt={`Slide ${index + 1}`} />
+            </SwiperSlide>
+          ))}
 
-    // const images = [
-    //     {
-    //         url: "/image/portfoilo/port-single-img3.jpg",
-    //     },
-    //     {
-    //         url: "/image/portfoilo/port-single-img4.jpg",
-    //     },
-    //     {
-    //         url: "/image/portfoilo/port-single-img5.jpg",
-    //     }
-    // ];
-
-    return (
-        <div className='custom_container relative custom_global_space'>
-            <div className="port-banner-slider">
-                <Swiper
-                    modules={[Pagination, EffectFade, Autoplay, Navigation]}
-                    effect="fade"
-                    autoplay={{ delay: 3000, disableOnInteraction: false }}
-                    loop={true}
-                    navigation={{
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    }}
-                    pagination={{ clickable: true }}
-                    className="mySwiper"
-                >
-                    {imageData.map((image, index) => (
-                        <SwiperSlide key={index}>
-                            <img src={image} alt={`Slide ${index + 1}`} />
-                        </SwiperSlide>
-                    ))}
-
-                    {/* Custom navigation buttons */}
-                    <div className="swiper-button-prev custom-prev">
-                        <HiArrowLeft />
-                    </div>
-                    <div className="swiper-button-next custom-next">
-                        <HiArrowRight />
-                    </div>
-                </Swiper>
-            </div>
-        </div>
-    );
+          {/* Custom navigation buttons */}
+          <div className="swiper-button-prev custom-prev">
+            <HiArrowLeft />
+          </div>
+          <div className="swiper-button-next custom-next">
+            <HiArrowRight />
+          </div>
+        </Swiper>
+      </div>
+    </div>
+  );
 }
