@@ -37,9 +37,9 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
   });
 
   const handleServiceSelect = (service) => {
-    setSelectedService(service.label);
+    setSelectedService(service.service);
     setDropdownOpen(false);
-    setFormData({ ...formData, option: service.value });
+    setFormData({ ...formData, option: service.service });
   };
 
   const handleMarkerClick = (position) => {
