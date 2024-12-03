@@ -4,6 +4,7 @@ import { GoogleMap, Marker, LoadScript, InfoWindow } from "@react-google-maps/ap
 import Loader from "../../layout/Loader";
 import { BASE_URL, GOOGLE_MAPS_API_KEY } from "../../../utils/config";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const mapContainerStyle = {
   width: "100%",
@@ -79,9 +80,12 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
       const result = await response.json();
       if (response.ok) {
         setSuccessMessage("Message sent successfully!");
+        toast.success("Message sent successfully!");
+        setSelectedService("")
         setFormData({ name: "", email: "", message: "" });
       } else {
         setErrorMessage(result.message || "Failed to send message. Please try again.");
+        toast.error("Failed to send message. Please try again.");
       }
     } catch (error) {
       setErrorMessage("An error occurred. Please try again later.");

@@ -6,6 +6,7 @@ import { SlArrowUp } from 'react-icons/sl';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../utils/config';
 import Loader from './Loader';
+import { toast } from "react-toastify";
 
 export default function Footer() {
     const [isVisible, setIsVisible] = useState(false);

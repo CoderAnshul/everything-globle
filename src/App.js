@@ -20,11 +20,13 @@ import TermsOfUse from "./app/terms-of-use/TermsOfUse";
 import ScrollToTop from "./component/common/ScrollToTop";
 import { Provider } from "react-redux";
 import appStore from "./utils/store";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <Provider store={appStore}>
       <BrowserRouter>
+      <ToastContainer />
         <Header />
         <ScrollToTop />
         <Routes>
