@@ -1,4 +1,5 @@
-export const BASE_URL = "https://everythinge.nexprism.in/api/admin"
+// export const BASE_URL = "https://everythinge.nexprism.in/api/admin"
+export const BASE_URL = "https://codeyes-server.vercel.app/api/admin";
 // export const BASE_URL = "https://devvrat-new-backend.onrender.com/api/admin"
 // export const BASE_URL = "https://everythinge.nexprism.in/api/admin"
 export const IMAGE_BASE_URL = "https://everythinge.nexprism.in/public/blog/images";

@@ -11,7 +11,7 @@
 //         date: '13 MAR',
 //         category: 'creative',
 //         title: 'Got Your Eye On This Season’s Trends',
-//         content: 'Voluptatem ea rerum nisi. Ullam debitis optio. Quae odio quasi repellat sit fugiat dolor manet. Officia et doloum. Eos non itaque ut libero dolorum hic voluptas repudiandae. Fugiat bisun quos et odit vel optio. Autm neque volu ptatum. Et et ducimus ut est aut. Voluptatem ea rerum nisi. Turpis nunc eget lorem dolor sed viverra ipsum. Non consectetur a erat nam at bibendum.'
+//         content: 'Vol  uptatem ea rerum nisi. Ullam debitis optio. Quae odio quasi repellat sit fugiat dolor manet. Officia et doloum. Eos non itaque ut libero dolorum hic voluptas repudiandae. Fugiat bisun quos et odit vel optio. Autm neque volu ptatum. Et et ducimus ut est aut. Voluptatem ea rerum nisi. Turpis nunc eget lorem dolor sed viverra ipsum. Non consectetur a erat nam at bibendum.'
 //     },
 //     {
 //         id: 2,

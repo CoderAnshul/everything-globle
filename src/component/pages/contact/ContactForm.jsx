@@ -80,9 +80,11 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
       const result = await response.json();
       if (response.ok) {
         setSuccessMessage("Message sent successfully!");
-        toast.success("Message sent successfully!");
+       
+        // console.log("form sent")
         setSelectedService("")
         setFormData({ name: "", email: "", message: "" });
+        toast("Message sent successfully!");
       } else {
         setErrorMessage(result.message || "Failed to send message. Please try again.");
         toast.error("Failed to send message. Please try again.");
