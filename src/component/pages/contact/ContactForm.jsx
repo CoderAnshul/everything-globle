@@ -84,7 +84,7 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
         // console.log("form sent")
         setSelectedService("")
         setFormData({ name: "", email: "", message: "" });
-        toast("Message sent successfully!");
+        toast.success("Message sent successfully!");
       } else {
         setErrorMessage(result.message || "Failed to send message. Please try again.");
         toast.error("Failed to send message. Please try again.");

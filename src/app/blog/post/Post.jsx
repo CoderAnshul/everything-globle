@@ -180,11 +180,14 @@ import axios from 'axios'
 import moment from 'moment'
 import Loader from '../../../component/layout/Loader'
 import { BASE_URL } from '../../../utils/config'
+import { useSelector } from 'react-redux'
+import {LinkedinShareButton,TwitterShareButton,
+    FacebookShareButton} from "react-share"
 
 export default function Post() {
-
+  
     const { id } = useParams()
-
+    const newCommentId=useSelector(store=> store.blog.newAddedCommentId)
 
 
     const [blogPosts, setBlogData] = useState();
@@ -204,10 +207,10 @@ export default function Post() {
         };
 
         fetchBlogs();
-    }, []);
+    }, [newCommentId]);
 
 
-
+    const currentPageUrl = window.location.href;
     if (loading) {
         return <Loader />;
     }
@@ -215,7 +218,7 @@ export default function Post() {
     if (error) {
         return <div>{error}</div>;
     }
-
+console.log(blogPosts)
     return (
         <>
             <div className='space-y-5'>
@@ -251,20 +254,28 @@ export default function Post() {
                                 {/* <p className='border border-black rounded-[50px] px-4 w-fit py-1'>cool</p>
                                 <p className='border border-black rounded-[50px] px-4 w-fit py-1'>design</p> */}
                             </div>
-                            <div className="custom_tool_tip z-20 text-xl px-6 font-semibold relative  border border-black p-2 w-fit whitespace-nowrap bg-white rounded-lg shadow-lg" >
+                            {/* <div className="custom_tool_tip z-20 text-xl px-6 font-semibold relative  border border-black p-2 w-fit whitespace-nowrap bg-white rounded-lg shadow-lg" >
                                 <div className='flex gap-4'>
                                     <div className={`hover:text-[#f8a065] text-sm cursor-pointer`}><FaLinkedin /></div>
                                     <div className={`hover:text-[#f8a065] text-sm cursor-pointer `}><FaFacebook /></div>
                                     <div className={`hover:text-[#f8a065] text-sm cursor-pointer `}><FaTwitter /></div>
                                     <div className={`hover:text-[#f8a065] text-sm cursor-pointer`}><FaInstagram /></div>
                                 </div>
+                            </div> */}
+                             <div className="custom_tool_tip z-20 text-xl px-6 font-semibold relative  border border-black p-2 w-fit whitespace-nowrap bg-white rounded-lg shadow-lg" >
+                                <div className='flex gap-4'>
+                                  <LinkedinShareButton url={currentPageUrl}  >  <div className={`hover:text-[#f8a065] text-sm cursor-pointer`}><FaLinkedin /></div></LinkedinShareButton>
+                                   <FacebookShareButton url={currentPageUrl} quote="Please share this post" hashtag='#codeyes'> <div className={`hover:text-[#f8a065] text-sm cursor-pointer `}><FaFacebook /></div></FacebookShareButton>
+                                   <TwitterShareButton url={currentPageUrl}> <div className={`hover:text-[#f8a065] text-sm cursor-pointer `}><FaTwitter /></div></TwitterShareButton>
+                                    {/* <div className={`hover:text-[#f8a065] text-sm cursor-pointer`}><FaInstagram /></div> */}
+                                </div>
                             </div>
                         </div>
                         <ProfileCard
-                            name="Steven Zissou"
-                            role="MARKETING"
-                            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor dolore magna aliqua."
-                            imageUrl="https://i.pravatar.cc/150?img=32"
+                            name={blogPosts.authorName}
+                            role={blogPosts.authorRole   }
+                            description={blogPosts.authorDescription     }
+                            imageUrl={blogPosts.authorProfile   }
                         />
                         <CommentSection blogPosts={blogPosts}  />
                         <CommentForm />

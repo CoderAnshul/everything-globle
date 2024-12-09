@@ -2,9 +2,13 @@ import React from "react";
 import { GoDotFill } from "react-icons/go";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../../../utils/config";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { addNewComment } from "../../../utils/blogSlice";
 
 export default function CommentForm() {
   const { id } = useParams();
+  const dispatch=useDispatch()
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -24,7 +28,7 @@ export default function CommentForm() {
       const response = await fetch(`${BASE_URL}/blogs/${id}/comments`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json",  
         },
         body: JSON.stringify(data),
       });
@@ -32,8 +36,13 @@ export default function CommentForm() {
       if (!response.ok) {
         throw new Error("Failed to submit the comment");
       }
+      if (response.ok) {
+       
+       toast.success("Comment added successfully")
+      }
 
       const result = await response.json();
+      dispatch(addNewComment(result.data._id))
       console.log("Comment submitted successfully:", result);
 
       // Optionally, clear the form fields after successful submission

@@ -12,7 +12,7 @@ const ProfileCard = ({ name, role, description, imageUrl }) => {
                 <div>
                     <p className="text-gray-600 uppercase text-sm mb-1">({role})</p>
                     <h2 className="text-2xl font-bold mb-4">{name}</h2>
-                    <p className="text-gray-700">{description}</p>
+                    <p className="text-gray-700" dangerouslySetInnerHTML={{ __html: description }}></p>
                 </div>
             </div>
         </div>

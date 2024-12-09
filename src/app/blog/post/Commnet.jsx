@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { BASE_URL } from "../../../utils/config";
+import { addNewComment } from "../../../utils/blogSlice";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Comment = ({ comment, blogId }) => {
   const [showModal, setShowModal] = useState(false);
   const [commentId, setCommentId] = useState(null);
+  const dispatch = useDispatch()
   const handleReplyClick = (commId) => {
     setCommentId(commId); // Set the comment ID to the clicked comment's ID
     setShowModal(true); // Show the modal
@@ -29,6 +33,7 @@ const Comment = ({ comment, blogId }) => {
       email,
       website,
     };
+    let count = 1;
 
     try {
       const response = await fetch(`${BASE_URL}/blogs/${blogId}/comments/${commentId}/replies`, {
@@ -42,8 +47,14 @@ const Comment = ({ comment, blogId }) => {
       if (!response.ok) {
         throw new Error("Failed to submit the comment");
       }
+      if (response.ok) {
+        
+        toast.success("Reply added successfully")
+       }
 
       const result = await response.json();
+      count = count +1;
+      dispatch(addNewComment(count))
       console.log("Comment submitted successfully:", result);
 
       // Optionally, clear the form fields after successful submission

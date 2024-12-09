@@ -21,6 +21,7 @@ import ScrollToTop from "./component/common/ScrollToTop";
 import { Provider } from "react-redux";
 import appStore from "./utils/store";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
