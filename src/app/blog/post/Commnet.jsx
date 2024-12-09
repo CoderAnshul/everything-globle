@@ -165,9 +165,10 @@ const CommentSection = ({ blogPosts }) => {
   return (
     <div className="pb-6">
       <h2 className="text-4xl font-bold mb-8">{totalCount || 0} Comments</h2>
+      <div className=' max-h-96 overflow-y-scroll'>
       {blogPosts.comments?.map((comment) => (
         <Comment key={comment.id} comment={comment} blogId={blogPosts.id} />
-      ))}
+      ))}</div>
     </div>
   );
 };
