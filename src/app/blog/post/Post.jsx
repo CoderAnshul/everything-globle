@@ -207,7 +207,7 @@ export default function Post() {
         };
 
         fetchBlogs();
-    }, [newCommentId]);
+    }, [newCommentId,id]);
 
 
     const currentPageUrl = window.location.href;
