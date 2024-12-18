@@ -72,7 +72,7 @@ export const Testimonials = () => {
                         <img src={item?.image_url} className={`rounded-full overflow-hidden border border-black h-[200px] w-[200px]`} alt={`category-1`} />
                         <div className={`border border-black w-[80%] ml-auto -mt-14 relative bg-white flex flex-col justify-start space-y-4 p-4 sm:p-8 rounded-2xl `}>
                             <h3 className={`font-semibold text-xl`}>{item?.name}</h3>
-                            <div className={`text-black/90 text-sm sm:text-base`}><p>{item?.description}</p></div>
+                            <div className={`text-black/90 text-sm sm:text-base`}><p>{item?.description.slice(0,70)}{item?.description.length >50 ? "..." : ""}</p></div>
                         </div>
                         <div className="absolute -bottom-5 -right-0 border border-black bg-[#cbdec6] rounded-xl p-3">
                             <MdFormatQuote className='text-3xl' />
