@@ -175,9 +175,9 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
               </div>
 
               {dropdownOpen && (
-                <ul className="absolute w-[95%] left-[2.5%] z-10 bg-white border border-black rounded-3xl overflow-hidden mt-2">
+                <ul className="absolute w-[95%] z-50 left-[2.5%]  bg-white border border-black rounded-3xl overflow-hidden mt-2">
                   {blogPosts.map((service) => (
-                    <li key={service.service} className="py-2 px-5 hover:bg-gray-100 cursor-pointer" onClick={() => handleServiceSelect(service)}>
+                    <li key={service.service} className="py-2 px-5 z-50 hover:bg-gray-100 cursor-pointer" onClick={() => handleServiceSelect(service)}>
                       {service.service}
                     </li>
                   ))}
