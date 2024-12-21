@@ -175,7 +175,7 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
               </div>
 
               {dropdownOpen && (
-                <ul className="absolute w-[95%] z-50 left-[2.5%]  bg-white border border-black rounded-3xl overflow-hidden mt-2">
+                <ul className="absolute w-[95%] z-50 left-[2.5%] max-h-[300px]  bg-white border border-black rounded-3xl overflow-y-scroll mt-2">
                   {blogPosts.map((service) => (
                     <li key={service.service} className="py-2 px-5 z-50 hover:bg-gray-100 cursor-pointer" onClick={() => handleServiceSelect(service)}>
                       {service.service}
@@ -208,7 +208,7 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
                   <span className="sliding-text hidden group-hover:block">Send Message</span>
                   <GoDotFill className="text-[#f8a065] hidden group-hover:block" />
                   <span className="sliding-text">Send Message</span>
-                </div>
+                </div> 
               </button>
             </div>
           </form>

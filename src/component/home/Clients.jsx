@@ -10,6 +10,7 @@ const Clients = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [loading, setLoading] = useState(true);
     const [clientData, setClientData] = useState([]);
+     const [imageHover,setImageHover]= useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -65,17 +66,28 @@ const Clients = () => {
         ]
     };
 
+    const mouseEnter = (item,i)=>{
+        setHoveredIndex(i)
+        setImageHover(true)
+       
+      }
+      const mouseLeave = (item,i)=>{
+        setHoveredIndex(i)
+        setImageHover(false)
+        
+      }
+
     return (
         <Slider {...settings}>
             {clientData.map((item, i) => (
                 <div
                     className={`h-[180px] sm:h-[210px] xl:h-[250px] w-[130px] sm:w-[260px] border border-black flex items-center justify-center hover:rounded-[50px] duration-500 ease-in-out overflow-hidden`}
                     key={i}
-                    onMouseEnter={() => setHoveredIndex(i)}
-                    onMouseLeave={() => setHoveredIndex(null)}
+                    onMouseEnter={() => mouseEnter(item,i) }
+                    onMouseLeave={() => mouseLeave(item,i)}
                 >
                     <img
-                        src={item?.banner_image}
+                        src={`${imageHover ? hoveredIndex ==i? item?.hover_image :item?.banner_image :item?.banner_image }`}
                         alt={`Client ${i}`}
                         className="h-full object-contain"
                     />

@@ -22,6 +22,7 @@ import { Provider } from "react-redux";
 import appStore from "./utils/store";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import News from "./app/news/News";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/post/:id" element={<Post />} />
+          <Route path="/news/:id" element={<News/>} />
           <Route path="/blog" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
