@@ -33,7 +33,7 @@ const Comment = ({ comment, blogId }) => {
       email,
       website,
     };
-    let count = 1;
+    let count = Math.random();
 
     try {
       const response = await fetch(`${BASE_URL}/blogs/${blogId}/comments/${commentId}/replies`, {

@@ -50,7 +50,7 @@ const VideoTestimonial = () => {
     // Open modal with the selected video
     const openModal = (videoUrl) => {
         // Extract video ID from the YouTube URL
-        const videoId = new URL(videoUrl).searchParams.get('v');
+        const videoId = getVideoId(videoUrl);
         setSelectedVideo(videoId);
         setModalIsOpen(true);
     };
@@ -94,14 +94,47 @@ const VideoTestimonial = () => {
         ]
     };
 
+    const getVideoId = (url)=>{
+        try {
+            // Parse the URL
+            const parsedUrl = new URL(url);
+            
+    
+            // Check if the URL is a standard YouTube link with a 'v' parameter
+            if (parsedUrl.hostname === "www.youtube.com" || parsedUrl.hostname === "youtube.com") {
+                if (parsedUrl.searchParams.has('v')) {
+                    return parsedUrl.searchParams.get('v'); // Extract 'v' parameter
+                }
+    
+                // For Shorts URLs
+                if (parsedUrl.pathname.startsWith("/shorts/")) {
+                    return parsedUrl.pathname.split("/shorts/")[1]; // Extract ID after '/shorts/'
+                }
+            }
+    
+            // Check if the URL is a shortened YouTube link
+            if (parsedUrl.hostname === "youtu.be") {
+                return parsedUrl.pathname.substring(1); // Extract the path after '/'
+            }
+            
+    
+            // If not a YouTube URL, return null
+            return null;
+        } catch (error) {
+            console.error("Invalid URL:", error);
+            return null;
+        }
+    }
+
     return (
         <div className="relative custom_container">
             <Slider {...settings}>
-                {testimonialData.map((video) => (
-                    <div key={video.id} className="relative mb-10 sm:px-4">
+                {testimonialData.map((video) => {
+                    const videoId = getVideoId(video.videoUrl)
+                    return <div key={video.id} className="relative mb-10 sm:px-4">
                         <div className="relative">
                             <img
-                                src={`https://img.youtube.com/vi/${new URL(video.videoUrl).searchParams.get('v')}/hqdefault.jpg`}
+                                src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
                                 className="rounded-xl overflow-hidden w-full"
                                 alt={`Video Thumbnail`}
                             />
@@ -113,7 +146,7 @@ const VideoTestimonial = () => {
                         </div>
                         <h3 className="font-semibold text-xl mt-4 text-center">{video.title}</h3>
                     </div>
-                ))}
+})}
             </Slider>
 
             <Modal
