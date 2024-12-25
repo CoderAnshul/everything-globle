@@ -50,7 +50,8 @@ export default function PortfolioSlug() {
                 <span className="text-lg text-[#151015] font-semibold">Category:</span>&nbsp; ({data?.category?.name})
               </p>
               <p>
-                <span className="text-lg text-[#151015] font-semibold">Tag:</span>&nbsp; <span className="border border-black py-1 px-3 rounded-full">{data?.tags.map((item) => item)}</span>
+                <span className="text-lg text-[#151015] font-semibold">Tag:</span>&nbsp;
+                {data?.tags.map(item=>(<span className="border border-black py-1 px-3 rounded-full">{item}</span>))}
               </p>
               <p>
                 <span className="text-lg text-[#151015] font-semibold">Date:</span>&nbsp; {moment(data?.createdAt).format("DD-MM-YYYY")}
