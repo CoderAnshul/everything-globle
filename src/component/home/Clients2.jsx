@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Loader from "../layout/Loader";
 import axios from "axios";
-import { BASE_URL } from "../../utils/config";
+import { BASE_URL, orgId } from "../../utils/config";
 
 
 const Clients2 = () => {
@@ -17,7 +17,7 @@ const Clients2 = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resp = await axios.get(`${BASE_URL}/all-client-logo?organizationId=everything_globel`);
+                const resp = await axios.get(`${BASE_URL}/all-client-logo?organizationId=${orgId}`);
 
                 if (resp?.data?.http_status_code === 200) {
                     setClientData(resp?.data?.data || []);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { BASE_URL } from '../../utils/config';
+import { BASE_URL, IMAGE_BASE_URL, orgId } from '../../utils/config';
 import Loader from '../layout/Loader';
 
 export default function FiveColumns() {
@@ -13,15 +13,16 @@ export default function FiveColumns() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const resp = await axios.get(`${BASE_URL}/all-portfolio?organizationId=everything_globel`)
+            const resp = await axios.get(`${BASE_URL}/all-portfolio?organizationId=${orgId}`)
 
             if (resp?.data?.http_status_code === 200) {
                 setloading(false)
-                setPortfolioData(resp.data.data)
+                setPortfolioData(resp.data.data) 
             }
         }
         fetchData()
     }, [])
+    console.log(portfolioData)
 
 
     if (loading) {
@@ -85,7 +86,7 @@ export default function FiveColumns() {
                             onMouseMove={(e) => handleMouseMove(e, e.currentTarget)}
                         >
                             <img
-                                src={item?.banner_image[0]}
+                                src={`${IMAGE_BASE_URL}/${item?.banner_image}`}
                                 alt={item?.title}
                                 className="rounded-3xl"
                             />

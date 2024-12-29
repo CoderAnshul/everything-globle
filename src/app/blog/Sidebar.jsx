@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
-import { BASE_URL } from "../../utils/config";
+import { BASE_URL, orgId } from "../../utils/config";
 import Loader from "../../component/layout/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,14 +19,14 @@ export default function Sidebar() {
 
   useEffect(() => {
     const fetchCatData = async () => {
-      const resp = await axios.get(`${BASE_URL}/get-blog-category?organizationId=everything_globel`);
+      const resp = await axios.get(`${BASE_URL}/get-blog-category?organizationId=${orgId}`);
       if (resp?.data?.http_status_code === 200) {
         setCategories(resp.data.data);
         setCatLoading(false);
       }
     };
     const fetchTagData = async () => {
-      const resp = await axios.get(`${BASE_URL}/get-blog-tag?organizationId=everything_globel`);
+      const resp = await axios.get(`${BASE_URL}/get-blog-tag?organizationId=${orgId}`);
       if (resp?.data?.http_status_code === 200) {
         setTags(resp.data.data);
         setTagLoading(false);

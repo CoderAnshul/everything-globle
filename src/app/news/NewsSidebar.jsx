@@ -3,7 +3,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
-import { BASE_URL } from "../../utils/config";
+import { BASE_URL, orgId } from "../../utils/config";
 import Loader from "../../component/layout/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { addAllBlog, setShowBlogs } from "../../utils/blogSlice";
@@ -21,7 +21,7 @@ const [allBlogs,setBlogData]=useState([])
   useEffect(() => {
     const fetchBlogs = async () => {
        
-            const response = await axios.get(`${BASE_URL}/all-news?organizationId=everything_globel`);
+            const response = await axios.get(`${BASE_URL}/all-news?organizationId=${orgId}`);
             setBlogData(response.data.data);
             setTagLoading(false)
     };

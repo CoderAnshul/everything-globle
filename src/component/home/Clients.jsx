@@ -4,18 +4,18 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Loader from "../layout/Loader";
 import axios from "axios";
-import { BASE_URL } from "../../utils/config";
+import { BASE_URL, orgId } from "../../utils/config";
 
 const Clients = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [loading, setLoading] = useState(true);
     const [clientData, setClientData] = useState([]);
-     const [imageHover,setImageHover]= useState(false)
+     const [imageHover,setImageHover]= useState(false) 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resp = await axios.get(`${BASE_URL}/all-client-logo?organizationId=everything_globel`);
+                const resp = await axios.get(`${BASE_URL}/all-client-logo?organizationId=${orgId}`);
                 if (resp?.data?.http_status_code === 200) {
                     setClientData(resp?.data?.data || []);
                 }
@@ -31,6 +31,7 @@ const Clients = () => {
     if (loading) {
         return <Loader />;
     }
+    console.log(clientData)
 
     const settings = {
         dots: false,
@@ -76,7 +77,7 @@ const Clients = () => {
         setImageHover(false)
         
       }
-
+ 
     return (
         <Slider {...settings}>
             {clientData.map((item, i) => (

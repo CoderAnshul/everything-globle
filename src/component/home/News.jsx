@@ -15,7 +15,7 @@ export default function News() {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/all-news?organizationId=everything_globel`);
+                const response = await axios.get(`${BASE_URL}/all-news?organizationId=`);
 
                 setBlogData(response.data.data);
                 setLoading(false);

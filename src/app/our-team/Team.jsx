@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { MdOutlineFacebook } from 'react-icons/md';
-import { BASE_URL } from '../../utils/config';
+import { BASE_URL, orgId } from '../../utils/config';
 
 export default function Team() {
     const[team,setTeam]=useState([]);
@@ -10,7 +10,7 @@ export default function Team() {
         fetchData()
     },[])
     const fetchData=async()=>{  
-        const res = await fetch(`${BASE_URL}/all-our-team?organizationId=everything_globel`)
+        const res = await fetch(`${BASE_URL}/all-our-team?organizationId=${orgId}`)
         const json = await res.json();
         console.log(json)
         setTeam(json.data)

@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Modal from 'react-modal';
 import { MdPlayCircle } from 'react-icons/md';
 import axios from 'axios';
-import { BASE_URL } from '../../utils/config';
+import { BASE_URL, orgId } from '../../utils/config';
 import Loader from '../layout/Loader';
 
 // Ensure accessibility for the modal
@@ -21,7 +21,7 @@ const VideoTestimonial = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const resp = await axios.get(`${BASE_URL}/all-testimonial-video?organizationId=everything_globel`);
+                const resp = await axios.get(`${BASE_URL}/all-testimonial-video?organizationId=${orgId}`);
                 if (resp?.data?.http_status_code === 200) {
                     // Map the response to extract video_id and title
                     const formattedData = resp?.data?.data.map((video) => ({

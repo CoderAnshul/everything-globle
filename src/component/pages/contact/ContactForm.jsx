@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { GoogleMap, Marker, LoadScript, InfoWindow } from "@react-google-maps/api";
 import Loader from "../../layout/Loader";
-import { BASE_URL, GOOGLE_MAPS_API_KEY } from "../../../utils/config";
+import { BASE_URL, GOOGLE_MAPS_API_KEY, orgId } from "../../../utils/config";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -70,7 +70,7 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
     setSuccessMessage("");
     setErrorMessage("");
     try {
-      const response = await fetch(`${BASE_URL}/add-contact-us?organizationId=everything_globel`, {
+      const response = await fetch(`${BASE_URL}/add-contact-us?organizationId=${orgId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,7 +103,7 @@ const ContactForm = ({ mapCenter, selectedAddress }) => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/all-services?organizationId=everything_globel`);
+        const response = await axios.get(`${BASE_URL}/all-services?organizationId=${orgId}`);
 
         setBlogData(response.data.data);
         setLoadingData(false);

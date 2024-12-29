@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { Link } from "react-router-dom";
-import { BASE_URL, IMAGE_BASE_URL } from "../../../utils/config";
+import { BASE_URL, IMAGE_BASE_URL, orgId } from "../../../utils/config";
 import axios from "axios";
 import Loader from "../../layout/Loader";
 
@@ -11,10 +11,11 @@ export default function OurPortfolio() {
 
   const [portfolioData, setPortfolioData] = useState([]);
   const [loading, setloading] = useState(true);
+  // everything_globel
 
   useEffect(() => {
     const fetchData = async () => {
-      const resp = await axios.get(`${BASE_URL}/all-portfolio?organizationId=everything_globel`);
+      const resp = await axios.get(`${BASE_URL}/all-portfolio?organizationId=${orgId}`);
 
       if (resp?.data?.http_status_code === 200) {
         setloading(false);
