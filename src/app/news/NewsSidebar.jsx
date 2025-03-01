@@ -49,7 +49,7 @@ const [allBlogs,setBlogData]=useState([])
             allBlogs.map((post, index) => {  
               if (index < 5) {
                 return (
-                  <Link to={`/post/${post.id}`} key={post.id}>
+                  <Link to={`/news/${post.id}`} key={post.id}>
                     {" "}
                     <div className="space-y-4 flex gap-5">
                       <div className="w-[80px] rounded-2xl overflow-hidden">

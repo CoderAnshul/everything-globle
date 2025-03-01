@@ -4,7 +4,7 @@ import { GoDotFill } from 'react-icons/go'
 import Loader from '../layout/Loader';
 import moment from 'moment';
 import { stripHtml } from "string-strip-html";
-import { BASE_URL } from '../../utils/config';
+import { BASE_URL, orgId } from '../../utils/config';
 import { Link } from 'react-router-dom';
 
 export default function News() {
@@ -15,7 +15,7 @@ export default function News() {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await axios.get(`${BASE_URL}/all-news?organizationId=`);
+                const response = await axios.get(`${BASE_URL}/all-news?organizationId=${orgId}`);
 
                 setBlogData(response.data.data);
                 setLoading(false);

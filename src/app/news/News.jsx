@@ -31,7 +31,7 @@ const News = () => {
         };
 
         fetchBlogs();
-    }, []);
+    }, [id]);
   return (
     <>
     <div className='space-y-5'>
