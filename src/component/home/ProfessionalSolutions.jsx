@@ -30,7 +30,7 @@ export const ProfessionalSolutions1 = () => {
     ];
 
     return (
-        <div className="border border-black rounded-[70px] grid lg:grid-cols-2 overflow-hidden">
+        <div className="border border-black my-8 rounded-[70px] grid lg:grid-cols-2 overflow-hidden">
             <div className="col-span-1 border-r border-black">
                 <div className="px-10 py-14 sm:py-14 bg-[#d2ebf8] border-b border-black">
                     <h2 className="text-3xl sm:text-[52px] font-semibold">Portfolio Styles</h2>
@@ -67,7 +67,7 @@ export const ProfessionalSolutions2 = () => {
     ];
 
     return (
-        <div className="border border-black rounded-[70px] grid lg:grid-cols-2 overflow-hidden">
+        <div className="border my-8 border-black rounded-[70px] grid lg:grid-cols-2 overflow-hidden">
             <div className={`col-span-1 relative`} >
                 <img src={`/image/home/port${index}.png`} alt="Error" className='h-full object-cover lg:absolute w-full left-0' />
             </div>
