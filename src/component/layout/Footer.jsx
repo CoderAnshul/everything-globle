@@ -96,19 +96,19 @@ export default function Footer() {
                                 </div>
                                 <div className="col-span-1 space-y-3">
                                     <h5 className="text-2xl font-semibold">About Us</h5>
-                                    <div className="space-y-2 uppercase">
-                                        <p><Link to="/">HOME</Link></p>
-                                        <p><Link to="/about">ABOUT</Link></p>
-                                        <p><Link to="/services">SERVICES</Link></p>
-                                        <p><Link to="/portfolio">PORTFOLIO</Link></p>
+                                    <div className="space-y-2 capitalize">
+                                        <p><Link to="/">Home</Link></p>
+                                        <p><Link to="/about">About</Link></p>
+                                        <p><Link to="/services">Services</Link></p>
+                                        <p><Link to="/portfolio">Portfolio</Link></p>
                                         {/* <p><Link to="/faq">FAQs</Link></p> */}
-                                        <p><Link to="/our-client">OUR CLIENT</Link></p>
-                                        <p><Link to="/our-team">OUR TEAM</Link></p>
+                                        <p><Link to="/our-client">Our Client</Link></p>
+                                        <p><Link to="/our-team">Our Team</Link></p>
                                         {/* <p><Link to="/career">CAREER</Link></p> */}
-                                        <p><Link to="/blog">BLOG</Link></p>
+                                        <p><Link to="/blog">Blog</Link></p>
                                         {/* <p><Link to="/privacy-policy">Privacy Policy</Link></p> */}
                                         {/* <p><Link to="/terms-of-use">Terms of use</Link></p> */}
-                                        <p><Link to="/contact">CONTACT</Link></p>
+                                        <p><Link to="/contact">Contact</Link></p>
                                     </div>
                                 </div>
                                 <div className="col-span-1 space-y-3 mb-4">
