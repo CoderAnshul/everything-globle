@@ -11,8 +11,8 @@ export default function PortBanner(image) {
   const imageData = image?.image;
 
   return (
-    <div className="custom_container relative custom_global_space">
-      <div className="port-banner-slider">
+    <div className="custom_container relative custom_global_space max-h-[70vh]">
+      <div className="port-banner-slider max-h-[70vh]">
         <Swiper
           modules={[Pagination, EffectFade, Autoplay, Navigation]}
           effect="fade"
@@ -27,7 +27,7 @@ export default function PortBanner(image) {
         >
           {imageData.map((image, index) => (
             <SwiperSlide key={index}>
-              <img src={`${IMAGE_BASE_URL}/${image}`} alt={`Slide ${index + 1}`} />
+              <img src={`${IMAGE_BASE_URL}/${image}`} className="max-h-[70vh] object-cover" alt={`Slide ${index + 1}`} />
             </SwiperSlide>
           ))}
 

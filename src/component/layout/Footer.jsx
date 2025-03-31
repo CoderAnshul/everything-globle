@@ -109,6 +109,7 @@ export default function Footer() {
                                         {/* <p><Link to="/privacy-policy">Privacy Policy</Link></p> */}
                                         {/* <p><Link to="/terms-of-use">Terms of use</Link></p> */}
                                         <p><Link to="/contact">Contact</Link></p>
+                                        <p><Link to="/career">Career</Link></p>
                                     </div>
                                 </div>
                                 <div className="col-span-1 space-y-3 mb-4">

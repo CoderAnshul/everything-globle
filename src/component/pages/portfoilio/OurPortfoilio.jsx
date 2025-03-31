@@ -63,7 +63,7 @@ export default function OurPortfolio() {
       </div>
 
       {/* Portfolio Items */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 mb-6 sm:mb-28">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 mb-6 gap-4 sm:mb-28">
         {portfolioData.slice(0, visibleItems).map((item) => (
           <div key={item.id} className="space-y-3 group cursor-pointer">
             <Link to={`/portfolio-slug/${item?.id}`}>

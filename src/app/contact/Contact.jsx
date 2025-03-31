@@ -14,6 +14,7 @@ export default function Contact() {
         phone: '+1123456788',
     });
 
+
     const handleLocationClick = (location, address) => {
         setMapCenter(location);
         setSelectedAddress(address);
