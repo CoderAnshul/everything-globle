@@ -7,7 +7,7 @@ import axios from "axios";
 import moment from "moment";
 import Loader from "../../component/layout/Loader";
 import { stripHtml } from "string-strip-html";
-import { BASE_URL } from "../../utils/config";
+import { BASE_URL, orgId } from "../../utils/config";
 import { useDispatch, useSelector } from "react-redux";
 import { addAllBlog, setFirstBlogVisit, setShowBlogs } from "../../utils/blogSlice";
 import CommonBanner from "../../component/common/CommonBanner";
@@ -32,7 +32,7 @@ export default function Blog() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/get-blog?organizationId=codeyes_media`);
+        const response = await axios.get(`${BASE_URL}/get-blog?organizationId=${orgId}`);
         if (firstBlogVisit) {
           dispatch(addAllBlog(response.data.data));
           dispatch(setShowBlogs(response.data.data));
